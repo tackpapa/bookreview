@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/css/add.css" type="text/css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">WELCOME, {{session['name']}}</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/books">Home</a></li>
+                    <li><a href="/books/addpage">Add Book and Review</a></li>
+                    <li><a href="/users/logout">logout</a></li>
+              </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+<div id='one'>
+    <h3>
+      Add a New Book Title and a Review:
+    </h3>
+
+    <form action="/books/add" method="POST">
+      Book Title:<input type="text" name="title"><br>
+      Author: <br>
+        Choose from the list:
+        <select name="authorpick">
+        <option value="none">Can't find it in the list!</option>
+        {% for x in books %}
+        <option value="{{books.author}}">{{books.author}}</option>
+        {% endfor %}
+      </select><br>
+      Or add a new author:<input type="text" name="author"><br>
+      Review:<input type="text" name="review"><br>
+      <select name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><p>stars</p>
+      <br>
+      <input type="submit" value="Add Book and Review">
+  </form>
+</div>
+
+
+
+
+
+
+</body>
+
+</html>

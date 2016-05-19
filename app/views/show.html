@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/css/show.css" type="text/css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">WELCOME, {{session['name']}}</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/books">Home</a></li>
+                    <li><a href="/books/addpage">Add Book and Review</a></li>
+                    <li><a href="/users/logout">logout</a></li>
+              </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div id="left">
+      {% if books %}
+    <h2>{{books[0]['title']}} </h2>
+    <h3>Author:{{ books[0]['author'] }}</h3>
+    {% endif %}
+
+    <h3>Reviws:</h3>
+    <hr>
+
+      {%  for x in books %}
+
+        <p>Book Title:{{  x['title'] }}</p>
+        <p>Rating:{{    x.rating   }}</p>
+        <p><a href="/users/{{x['user_id']}}">{{ x['name']}}</a> says:{{ x['review']  }}</p>
+        <p>{{ x['created_at'] }}</p>
+          {% if session['userid'] == x['user_id' ]%}
+            <button  method='get' action='/delete/session['userid']'> delete my review</button>
+          {% endif %}
+        <hr>
+
+        {% endfor %}
+
+
+    </div>
+
+    <div id='right'>
+      <h3>Add a Reviews:</h3><br>
+      <form action="/reviews/add" method="POST">
+        <input type='hidden' name='book_id' value='{{session['book_id']}}'>
+
+       <input type="text" name="review"><br>
+        <select name="rating">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+
+        </select>
+        <p>stars</p>
+        <input type="submit" value="Submit Review">
+    </form>
+
+
+
+    </div>
+
+
+
+
+
+</body>
+
+</html>
