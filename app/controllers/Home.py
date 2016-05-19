@@ -7,6 +7,8 @@ class Home(Controller):
 
 
     def index(self):
+        if 'name' not in session:
+            session['name']=[]
         if session['name']:
             return redirect ('/books')
 
