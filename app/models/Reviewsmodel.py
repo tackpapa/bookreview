@@ -21,6 +21,7 @@ class Reviewsmodel(Model):
         return self.db.query_db(query, data)
 
     def delete(self, id):
+        "sasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasas"
         query="DELETE from reviews where id=:id"
         data = {'id': id}
         return self.db.query_db(query, data)

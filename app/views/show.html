@@ -55,8 +55,13 @@
         <p>Rating:{{    x.rating   }}</p>
         <p><a href="/users/{{x['user_id']}}">{{ x['name']}}</a> says:{{ x['review']  }}</p>
         <p>{{ x['created_at'] }}</p>
+
           {% if session['userid'] == x['user_id' ]%}
-            <button  method='get' action='/delete/session['userid']'> delete my review</button>
+            <form action="/delete" method='POST'>
+              <input type="hidden" name="reviewid" value="{{x['review_id']}}">
+              <input type="hidden" name="bookid" value="{{x['id']}}">
+                <input type="submit" value="delete review">
+            </form>
           {% endif %}
         <hr>
 

@@ -14,7 +14,7 @@ class Booksmodel(Model):
         return self.db.query_db(query)
 
     def showall(self, id):
-        query = "SELECT books.id, books.title, books.author, reviews.review, reviews.rating, reviews.created_at, users.id as user_id, users.name from books left join reviews ON books.id=reviews.book_id left join users ON users.id=reviews.user_id WHERE books.id=:id order by reviews.created_at DESC"
+        query = "SELECT books.id, books.title, books.author, reviews.review, reviews.rating, reviews.id as review_id, reviews.created_at, users.id as user_id, users.name from books left join reviews ON books.id=reviews.book_id left join users ON users.id=reviews.user_id WHERE books.id=:id order by reviews.created_at DESC"
         data = {'id': id}
         return self.db.query_db(query, data)
 
@@ -29,5 +29,5 @@ class Booksmodel(Model):
         return self.db.query_db(query, data)
 
     def authors(self):
-        query = "SELECT books.author from books"
+        query = "SELECT books.author from books group by author"
         return self.db.query_db(query)

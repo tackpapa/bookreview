@@ -21,6 +21,9 @@ class Reviews(Controller):
 
         return redirect (url1)
 
-    def delete(self, id):
-        self.models['Reviewsmodel'].delete(id)
-        return redirect('/books')
+    def delete(self):
+        reviewid=request.form['reviewid']
+        book_id=request.form['bookid']
+        self.models['Reviewsmodel'].delete(reviewid)
+        url= "/books/"+str(book_id)
+        return redirect(url)

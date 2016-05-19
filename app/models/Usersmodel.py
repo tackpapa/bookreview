@@ -22,12 +22,12 @@ class Usersmodel(Model):
         email = info['email']
         userquery = "SELECT * FROM users WHERE email = :email LIMIT 1"
         userdata = {'email': email}
+
         user = self.db.query_db(userquery, userdata)
-        if len(user)== 0:
-            return False
         if user:
             if self.bcrypt.check_password_hash(user[0]['pw'], pw):
-                return user
+               return user
+        return False
 
     def showuser(self, id):
         query = "select users.alias, users.name, users.email, count(reviews.id) as total from users left join reviews on users.id=reviews.user_id left join books on reviews.book_id=books.id where users.id=:id"

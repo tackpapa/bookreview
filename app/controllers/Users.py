@@ -60,19 +60,23 @@ class Users(Controller):
         'email':email,
         'pw': pw
         }
-        session['user']=self.models['Usersmodel'].login(info)
-        user=session['user']
-        session['status']=True
-        session['userid']=user[0]['id']
-        session['name']=user[0]['name']
 
-        if session['user']==False:
+        user=self.models['Usersmodel'].login(info)
+        print user
+        if user==False:
             flash('invalid email or password')
-        if user:
+            return redirect('/')
+        elif user:
+            session['userid'] = user[0]['id']
+            session['name'] = user[0]['name']
+            session['email']=user[0]['email']
+            session['alias']=user[0]['alias']
+            session['status']=True
             return redirect('/books')
 
     def logout(self):
-        session['user']=[]
+        session['email']=[]
+        session['alias']=[]
         session['name']=[]
         session['userid']=[]
         session['status']=False

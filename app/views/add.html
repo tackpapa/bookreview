@@ -52,7 +52,7 @@
         <select name="authorpick">
         <option value="none">Can't find it in the list!</option>
         {% for x in books %}
-        <option value="{{books.author}}">{{books.author}}</option>
+        <option value="{{x['author']}}">{{x['author']}}</option>
         {% endfor %}
       </select><br>
       Or add a new author:<input type="text" name="author"><br>
